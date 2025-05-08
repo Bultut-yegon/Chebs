@@ -1,0 +1,311 @@
+{#{% extends 'master.html' %}#}
+{#{% load static %}#}
+{##}
+{#{% block title %}#}
+{#    <h3>Posts</h3>#}
+{#{% endblock %}#}
+{##}
+{#{% block content %}#}
+{#    <h2>Recent Posts</h2>#}
+{#    <div class="posts-container">#}
+{#        {% for post in posts %}#}
+{#            <div class="post">#}
+{#                <div class="user-info">#}
+{#                    <strong>{{ post.user.username }}</strong>#}
+{#                </div>#}
+{#                <div class="post-content">#}
+{#                    {% if post.image %}#}
+{#                        <img src="{{ post.image.url }}" alt="{{ post.text|truncatechars:30 }}" class="post-image">#}
+{#                    {% endif %}#}
+{#                    <p class="post-text">{{ post.text }}</p>#}
+{#                </div>#}
+{#            </div>#}
+{#        {% empty %}#}
+{#            <p>No posts yet.</p>#}
+{#        {% endfor %}#}
+{#    </div>#}
+{##}
+{#    <style>#}
+{#        .posts-container {#}
+{#            margin: 20px auto;#}
+{#            max-width: 800px;#}
+{#        }#}
+{##}
+{#        .post {#}
+{#            background-color: #f8f8f8;#}
+{#            border: 1px solid #eee;#}
+{#            border-radius: 8px;#}
+{#            margin-bottom: 20px;#}
+{#            padding: 15px;#}
+{#            display: flex;#}
+{#            flex-direction: column; /* Default to stack for text-only or image-only */#}
+{#        }#}
+{##}
+{#        .user-info {#}
+{#            margin-bottom: 10px;#}
+{#            color: #555;#}
+{#            font-size: 0.9em;#}
+{#        }#}
+{##}
+{#        .post-content {#}
+{#            display: flex;#}
+{#            align-items: flex-start; /* Align image and text to the top */#}
+{#        }#}
+{##}
+{#        .post-image {#}
+{#            max-width: 200px;#}
+{#            height: auto;#}
+{#            margin-right: 15px;#}
+{#            border-radius: 4px;#}
+{#        }#}
+{##}
+{#        .post-text {#}
+{#            background-color: #808080; /* Gray background for text */#}
+{#            color: white;#}
+{#            padding: 10px;#}
+{#            border-radius: 4px;#}
+{#            word-break: break-word; /* Prevent long words from breaking layout */#}
+{#            flex-grow: 1; /* Allow text to take remaining width */#}
+{#        }#}
+{##}
+{#        /* Adjust layout if there's no image */#}
+{#        .post:not(:has(.post-image)) .post-content {#}
+{#            flex-direction: column; /* Stack content if no image */#}
+{#        }#}
+{##}
+{#        .post:not(:has(.post-image)) .post-text {#}
+{#            margin-left: 0; /* No left margin if no image */#}
+{#        }#}
+{##}
+{#        /* Adjust layout if there's only text */#}
+{#        .post:has(.post-text):not(:has(.post-image)) .post-content {#}
+{#            width: 100%; /* Occupy full width if only text */#}
+{#        }#}
+{##}
+{#        /* Adjust layout if there's only an image */#}
+{#        .post:has(.post-image):not(:has(.post-text)) .post-content {#}
+{#            display: block; /* Image takes the block */#}
+{#        }#}
+{##}
+{#        .post:has(.post-image):not(:has(.post-text)) .post-image {#}
+{#            width: 100%;#}
+{#            max-width: none; /* Image occupies full width */#}
+{#            margin-right: 0;#}
+{#        }#}
+{#    </style>#}
+{#{% endblock %}#}
+
+{#{% extends 'master.html' %}#}
+{#{% load static %}#}
+{##}
+{#{% block title %}#}
+{#    <h3>Posts</h3>#}
+{#{% endblock %}#}
+{##}
+{#{% block content %}#}
+{#    <div style="text-align: right; margin-bottom: 15px;">#}
+{#        <a href="{% url 'create_post' %}" class="btn btn-success">Create New Post</a>#}
+{#    </div>#}
+{##}
+{#    <h2>Recent Posts</h2>#}
+{#    <div class="posts-container">#}
+{#        {% for post in posts %}#}
+{#            <div class="post">#}
+{#                <div class="user-info">#}
+{#                    <strong>{{ post.user.username }}</strong>#}
+{#                </div>#}
+{#                <div class="post-content">#}
+{#                    {% if post.image %}#}
+{#                        <img src="{{ post.image.url }}" alt="{{ post.text|truncatechars:30 }}" class="post-image">#}
+{#                    {% endif %}#}
+{#                    <p class="post-text">{{ post.text }}</p>#}
+{#                </div>#}
+{#            </div>#}
+{#        {% empty %}#}
+{#            <p>No posts yet.</p>#}
+{#        {% endfor %}#}
+{#    </div>#}
+{##}
+{#    <style>#}
+{#        /* Existing styles for posts-container and post */#}
+{#        .posts-container {#}
+{#            margin: 20px auto;#}
+{#            max-width: 800px;#}
+{#        }#}
+{##}
+{#        .post {#}
+{#            background-color: #f8f8f8;#}
+{#            border: 1px solid #eee;#}
+{#            border-radius: 8px;#}
+{#            margin-bottom: 20px;#}
+{#            padding: 15px;#}
+{#            display: flex;#}
+{#            flex-direction: column; /* Default to stack */#}
+{#        }#}
+{##}
+{#        .user-info {#}
+{#            margin-bottom: 10px;#}
+{#            color: #555;#}
+{#            font-size: 0.9em;#}
+{#        }#}
+{##}
+{#        .post-content {#}
+{#            display: flex;#}
+{#            align-items: flex-start;#}
+{#        }#}
+{##}
+{#        .post-image {#}
+{#            max-width: 200px;#}
+{#            height: auto;#}
+{#            margin-right: 15px;#}
+{#            border-radius: 4px;#}
+{#        }#}
+{##}
+{#        .post-text {#}
+{#            background-color: #808080;#}
+{#            color: white;#}
+{#            padding: 10px;#}
+{#            border-radius: 4px;#}
+{#            word-break: break-word;#}
+{#            flex-grow: 1;#}
+{#        }#}
+{##}
+{#        /* Adjust layout based on image/text presence */#}
+{#        .post:not(:has(.post-image)) .post-content {#}
+{#            flex-direction: column;#}
+{#        }#}
+{##}
+{#        .post:not(:has(.post-image)) .post-text {#}
+{#            margin-left: 0;#}
+{#        }#}
+{##}
+{#        .post:has(.post-text):not(:has(.post-image)) .post-content {#}
+{#            width: 100%;#}
+{#        }#}
+{##}
+{#        .post:has(.post-image):not(:has(.post-text)) .post-content {#}
+{#            display: block;#}
+{#        }#}
+{##}
+{#        .post:has(.post-image):not(:has(.post-text)) .post-image {#}
+{#            width: 100%;#}
+{#            max-width: none;#}
+{#            margin-right: 0;#}
+{#        }#}
+{##}
+{#        /* Style for the "Create New Post" button */#}
+{#        .btn-success {#}
+{#            background-color: #28a745; /* Bootstrap success green */#}
+{#            color: white;#}
+{#            padding: 10px 15px;#}
+{#            border: none;#}
+{#            border-radius: 5px;#}
+{#            text-decoration: none;#}
+{#            display: inline-block;#}
+{#            font-size: 16px;#}
+{#        }#}
+{##}
+{#        .btn-success:hover {#}
+{#            background-color: #218838;#}
+{#        }#}
+{#    </style>#}
+{#{% endblock %}#}
+
+
+{% extends 'master.html' %}
+{% load static %}
+
+{% block title %}
+    <h2>Posts</h2>
+{% endblock %}
+
+{% block content %}
+    <div style="text-align: right; margin-bottom: 8px;">
+        <a href="{% url 'create_post' %}" class="btn btn-success">Create New Post</a>
+    </div>
+
+    <h2>Recent Posts</h2>
+    <div class="posts-container">
+        {% for post in posts %}
+            <div class="post">
+                <div class="user-info">
+                    <strong>{{ post.user.username }}</strong>
+                </div>
+                <div class="post-content">
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}" alt="{{ post.content|truncatechars:30 }}" class="post-image">
+                        <p class="post-text">{{ post.content }}</p>
+                    {% else %}
+                        <p class="post-text full-width">{{ post.content }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        {% empty %}
+            <p>No posts yet.</p>
+        {% endfor %}
+    </div>
+
+    <style>
+        .posts-container {
+            margin: 20px auto;
+            max-width: 400px;
+        }
+
+        .post {
+            background-color: #f8f8f8;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 15px;
+        }
+
+        .user-info {
+            margin-bottom: 20px;
+            color: #555;
+            font-size: 0.9em;
+        }
+
+        .post-content {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .post-image {
+            max-width: 200px;
+            height: auto;
+            margin-right: 15px;
+            border-radius: 4px;
+        }
+
+        .post-text {
+            background-color: #808080;
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+            word-break: break-word;
+            flex-grow: 1;
+        }
+
+        /* If no image, the text takes full width */
+        .post-text.full-width {
+            width: 100%;
+            margin-left: 0;
+        }
+
+        /* Style for the "Create New Post" button */
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+            padding: 7px 12px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 13px;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+    </style>
+{% endblock %}

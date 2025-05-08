@@ -1,0 +1,105 @@
+/* Existing Navbar Styles (adjust as needed) */
+.navbar {
+    background-color: #333;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.navbar-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.nav-item {
+    margin-left: 20px;
+}
+
+.nav-item:first-child {
+    margin-left: 0;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+.nav-link:hover {
+    background-color: #555;
+}
+
+.logout-link {
+    background-color: #d32f2f;
+}
+
+.logout-link:hover {
+    background-color: #f44336;
+}
+
+/* Hamburger Menu Styles */
+.hamburger {
+    display: none; /* Hide by default on larger screens */
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    color: white;
+}
+
+.hamburger.active .fa-bars::before {
+    content: '\f00d'; /* Change to close icon when active (optional) */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar-nav {
+        display: none; /* Hide menu on smaller screens by default */
+        position: absolute;
+        top: 60px; /* Adjust based on your navbar height */
+        left: 0;
+        background-color: #333;
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        z-index: 10; /* Ensure it's above other content */
+    }
+
+    .navbar-nav.active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: block; /* Show hamburger on smaller screens */
+    }
+
+    .nav-item {
+        margin: 0;
+        width: 100%;
+        text-align: left;
+    }
+
+    .nav-link {
+        padding: 15px 20px;
+        border-bottom: 1px solid #555;
+        width: 100%;
+        display: block;
+    }
+
+    .nav-item:last-child .nav-link {
+        border-bottom: none;
+    }
+}

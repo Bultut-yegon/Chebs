@@ -1,0 +1,210 @@
+{% extends 'master.html' %}
+{% block title %}
+    <h3>Create activity</h3>
+{% endblock %}
+
+{% block content %}
+    {#	<h2>Share an activity</h2>#}
+    {#    <form action="" method="post">#}
+    {#    {% csrf_token %}#}
+    {#    {{ form.as_p }}#}
+    {#    </form>#}
+    {#    <button type="submit" class="btn btn-primary">Share the activity</button>#}
+    <div class="activity-container">
+        <h2>Share an Activity</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.content.id_for_label }}">Activity:</label>
+                {{ form.content }}
+                {% if form.content.errors %}
+                    <div class="error">{{ form.content.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.image.id_for_label }}">Photo (Optional):</label>
+                {{ form.image }}
+                {% if form.image.errors %}
+                    <div class="error">{{ form.image.errors }}</div>
+                {% endif %}
+            </div>
+            <button type="submit" class="btn btn-primary">Share Activity</button>
+        </form>
+    </div>
+
+    {#    <style>#}
+    {#        body {#}
+    {#            background: linear-gradient(to bottom, #f0e68c, #90ee90); /* Yellow to Green gradient */#}
+    {#            min-height: 100vh; /* Ensure full viewport height */#}
+    {#            display: flex;#}
+    {#            flex-direction: column;#}
+    {#            margin: 0;#}
+    {#        }#}
+    {##}
+    {#        .activity-container {#}
+    {#            background-color: #ffffff;#}
+    {#            padding: 30px;#}
+    {#            border-radius: 8px;#}
+    {#            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);#}
+    {#            width: 80%; /* Adjust width as needed */#}
+    {#            max-width: 600px; /* Limit maximum width */#}
+    {#            margin: 20px auto; /* Center horizontally with top/bottom margin */#}
+    {#            text-align: center;#}
+    {#            flex: 1 0 auto; /* Allow the container to grow and take available space */#}
+    {#        }#}
+    {##}
+    {#        h2 {#}
+    {#            color: #556b2f; /* Dark Olive Green */#}
+    {#            margin-bottom: 20px;#}
+    {#        }#}
+    {##}
+    {#        .form-group {#}
+    {#            margin-bottom: 15px;#}
+    {#            text-align: left;#}
+    {#        }#}
+    {##}
+    {#        label {#}
+    {#            display: block;#}
+    {#            margin-bottom: 5px;#}
+    {#            font-weight: bold;#}
+    {#            color: #333;#}
+    {#        }#}
+    {##}
+    {#        input[type="text"],#}
+    {#        textarea,#}
+    {#        input[type="file"] {#}
+    {#            width: 100%;#}
+    {#            padding: 10px;#}
+    {#            border: 1px solid #ccc;#}
+    {#            border-radius: 4px;#}
+    {#            box-sizing: border-box;#}
+    {#        }#}
+    {##}
+    {#        textarea {#}
+    {#            resize: vertical; /* Allow vertical resizing */#}
+    {#        }#}
+    {##}
+    {#        .btn-primary {#}
+    {#            background-color: #556b2f; /* Dark Olive Green */#}
+    {#            color: white;#}
+    {#            padding: 10px 20px;#}
+    {#            border: none;#}
+    {#            border-radius: 4px;#}
+    {#            cursor: pointer;#}
+    {#            font-size: 16px;#}
+    {#        }#}
+    {##}
+    {#        .btn-primary:hover {#}
+    {#            background-color: #6b8e23; /* Olive Drab */#}
+    {#        }#}
+    {##}
+    {#        .error {#}
+    {#            color: red;#}
+    {#            font-size: 0.9em;#}
+    {#            margin-top: 5px;#}
+    {#        }#}
+    {##}
+    {#        footer {#}
+    {#            background-color: #333;#}
+    {#            color: white;#}
+    {#            text-align: center;#}
+    {#            padding: 10px;#}
+    {#            margin-top: auto; /* Push the footer to the bottom */#}
+    {#        }#}
+    {#    </style>#}
+
+    <style>
+        body {
+            background: linear-gradient(to bottom, #f0e68c, #90ee90); /* Yellow to Green gradient */
+            min-height: 100vh; /* Ensure full viewport height */
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+        }
+
+        .activity-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%; /* Adjust width as needed */
+            max-width: 600px; /* Limit maximum width */
+            margin: 20px auto; /* Center horizontally with top/bottom margin */
+            text-align: center;
+            flex: 1 0 auto; /* Allow the container to grow and take available space */
+        }
+
+        h2 {
+            color: #556b2f; /* Dark Olive Green */
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"],
+        textarea,
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical; /* Allow vertical resizing */
+        }
+
+        .btn-primary {
+            background-color: #556b2f; /* Dark Olive Green */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn-primary:hover {
+            background-color: #6b8e23; /* Olive Drab */
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: auto; /* Push the footer to the bottom */
+        }
+
+        /* Style for links */
+        a {
+            color: #007bff; /* A more standard blue for links */
+            text-decoration: none; /* Remove underlines by default */
+            font-weight: bold; /* Make the text bolder */
+            padding: 5px 8px; /* Add some padding for better touch/click area */
+            border-radius: 3px; /* Optional: Add a slight rounded border */
+        }
+
+        a:hover {
+            text-decoration: underline; /* Add underline on hover for better feedback */
+            background-color: #e0f7fa; /* Optional: Add a light background on hover */
+        }
+    </style>
+{% endblock %}

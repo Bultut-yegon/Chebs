@@ -1,0 +1,95 @@
+{#{% extends 'master.html' %}#}
+{#{% block title %}#}
+{#	<h3>Postings</h3>#}
+{#{% endblock %}#}
+{##}
+{#{% block content %}#}
+{#	<h2>Create post</h2>#}
+{#    <form action="" method="post" enctype="multipart/form-data">#}
+{#    {% csrf_token %}#}
+{#    {{ form.as_p }}#}
+{#    </form>#}
+{#    <button type="submit" class="btn btn-primary">Post</button>#}
+{#{% endblock %}#}
+
+
+{% extends 'master.html' %}
+{% load static %}
+
+{% block title %}
+    <h3>Postings</h3>
+{% endblock %}
+
+{% block content %}
+    <div class="create-post-container">
+        <h2>Create Post</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Post</button>
+        </form>
+    </div>
+
+    <style>
+        body {
+            background: linear-gradient(to bottom, #8fbc8f, #d3d3d3); /* Green to Gray gradient */
+            min-height: 100vh;
+            margin: 0;
+            padding-bottom: 60px; /* Add padding for the fixed footer if you have one */
+        }
+
+        .create-post-container {
+            background-color: #f8f8f8; /* Light gray container background */
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #2e8b57; /* Sea green */
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: #2e8b57; /* Sea green */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background-color: #3cb371; /* Medium sea green */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"],
+        textarea,
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+    </style>
+{% endblock %}
