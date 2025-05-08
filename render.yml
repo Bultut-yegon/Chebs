@@ -1,0 +1,22 @@
+databases:
+  - name: chebz
+    plan: free
+    databaseName: Chebz
+    user: postgres
+
+services:
+  - type: web
+    plan: free
+    name: Chebz
+    runtime: python
+    buildCommand: './build.sh'
+    startCommand: 'python -m gunicorn Chebz.asgi:application -k uvicorn.workers.UvicornWorker'
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: chebz
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
